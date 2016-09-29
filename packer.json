@@ -1,0 +1,28 @@
+
+{
+    "builders":[
+        {
+            "type": "virtualbox-ovf",
+            "source_path": "../vagrant-ubuntu-1404.ova",
+            "ssh_username": "vagrant",
+            "ssh_password": "vagrant",
+            "shutdown_command": "echo 'packer' | sudo -S shutdown -P now"
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "script": "./install-ansible.sh"
+        },
+        {
+            "type": "ansible-local",
+            "playbook_dir": "./ansible",
+            "playbook_file": "./ansible/playbook.yml"
+        }
+    ],
+    "post-processors": [
+        {
+            "type": "vagrant"
+        }
+    ]
+}
