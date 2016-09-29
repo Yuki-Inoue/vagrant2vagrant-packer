@@ -5,4 +5,4 @@
     publickey: "{{ lookup('file', 'my_private_key.pub') }}"
   tasks:
     - name: put my public key to authorized keys
-      lineinfile: dest=/home/vagrant/.ssh/authorized_keys line="{{ publickey }}"
+      copy: dest=/home/vagrant/.ssh/authorized_keys content="{{ publickey }}"
